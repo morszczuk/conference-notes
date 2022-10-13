@@ -180,7 +180,7 @@ Then we can enjoy the programming. We can do tries and errors to enjoy the progr
 
 "The joy is the most important to Ruby."
 
-# How Music Works
+# How Music Works (AppSignal)
 
 What we are covering yoday?
 https://github.com/thijsc/how_music_works
@@ -268,4 +268,298 @@ Attack/release check if things are over the threshold?
 How would you write tests for that?
 (laughter)
 
-# How Music Works
+# Mel Kaulfuss - Applying SRE Principles CI/CD (Buildkite)
+
+She Flew the furthest (25 hours). She is Australian.
+
+First line in Ruby, RailsGirls, 2015.
+
+## Notes
+Overview:
+- Issues
+
+Story
+Part 1 - The Drama
+There's always drama in the software
+- Monolith
+- Gargantial
+- micro_services
+
+It's not about the destination, people you meet along the way.
+
+I prepare the changes and I merged it.
+My build failed.
+Test failed.
+Test is not related to the change I made.
+
+"I like boring deploys."
+
+Failing test? Run it again.
+"Oh that? That never worked."
+
+How long users spend hitting retry.
+Users in Buildkite:
+- 9413 days clicking the button
+- 1 day ->
+
+[flaky tests]
+
+Part 2 - The Recovery
+SRE - Site Reliability Engineering.
+Began at Google.
+Book - Site eliability Engineering by google. It's a lizard.
+
+SRE is part of Devops.
+
+DevOps principles:
+- Remove silos
+- Understand accidents are normal
+- Embrace gradual change
+- Understand Tooling & Culture are interrelated (Human systems are important to a good system)
+- Measurement is critical to success
+
+SRE principles:
+- work towards automating or eliminating repetition (especially when it )
+- System deisgn with a bias toward availability, latency & efficiency
+- Observability
+- Avoid more reliabilty more strickly than necessary
+
+Defining what is "necessary" fir the company.
+
+"One does not simply 100% reliability"
+
+"Feeks real bad! But is it really real bad?"
+
+Part 3 - The Future
+"it is difficulty to do your job well wthout clearly defining well."
+
+SLOs/SLIs/Error Budgets
+
+SLI - Service Level Indicator
+Service Level Objective - defines an acceptable level of unreliability
+Error Budget -
+
+Stop being reactive and start being proactive.
+
+Get together and start building a picture.
+#TO DO [questions]
+
+" What is the system?
+- from the picture
+
+Error Budget = 1 - your SLO
+
+Exapmle SLO/SLI/EB
+
+SLO
+Test suite reliability should be greater than 87%
+
+SLI
+Test Suite reliability
+
+Error Budget
+77 x test runs:
+- Reliability score < 87%
+- In a 4 week period
+
+You can use buildkite metrics to use any CI/CD you want.
+
+We have access to metrics.
+
+- TL;DR;
+  - start using metrics for your tests
+  - So it's okay to have failing pipeline **wWITHIN** the error budget
+  - test suite reliability so low
+
+
+"SLOs are powerful weapon to wield against micromanagers, meddlers, etc."
+
+### Questions
+How do you differentiate between tests that fail because the code is wrong and flaky tests and other infrastructure problems?
+It was usually the work.
+
+You mentioned CI “reliability score”. How do you define that score?
+
+###
+(Great vibe, she made us feel "welcome" in he presentation, great sense of humour, slow pace but with a lot of "details")
+
+
+# Jemma Issroff - Implementing Object Shapes in CRuby (Shopify)
+
+She was working on Implementing Object Shapes in CRuby (with).
+
+1. What are object shapes?
+2. How are object shapes implemented?
+
+(Ruby Object) "shapes".
+shapes - name of this technique. There from the SmallTalk.
+
+Shape - represents object's properties (e.g. instance variables).
+Ruby is a dynamic programming language, that's why the shape will change.
+
+#TODO [post image]
+
+Post class with two attributes.
+
+User (name)
+
+Admin - same properties.
+
+Two objects can have the same shape.
+
+(when we create)
+
+Root shape:
+- ID: 0
+- ivars: []
+
+Shape #1:
+ID: 1
+ivars: [@title]
+
+Shape #2:
+ID: 2
+ivars: [@title, :@author]
+
+
+**Two instances of the same class can have different shapes.**
+
+So it's like a path.
+
+"It's a tree".
+Shape of an object transitions with new properties (frozen status).
+
+_frozen_ creates a shape.
+
+2. How are object shapes implemented?
+
+How do we identify the shapes?
+Shape IDs.
+
+How many shapes can we have?
+Ruby runs on 64 bit machines. Use 32 bits for shape IDs (4.2 bullion shapes).
+
+32 bit machines - Use 16 bits for shape IDs (65k shapes)
+
+RailsBench: ~10k shapes.
+Shopify monolith: ~40k shapes.
+
+What information is encoded within a shape?
+In C
+```c
+struct rb_shape {
+  struct rb_id_table * edges // - values are the shape IDs
+  //
+  attr_index_t iv_conut // how many instance variables this shape has
+  unint type // (root shape, ivar shape - they took instance transition, frozen shape - always leaf nodes, no more transitions, undef shape - two ivar transitions. it's)
+  shape_id // shape ID
+}
+```
+
+undef_shape
+
+```ruby
+class Post
+attr_accessor :title
+end
+
+first_post = Post.new
+```
+
+What are the benefits of object shapes?
+1. Increased cache hits
+2. Decreased code complexity
+3. Beneficial for JITs
+4. Performance
+
+1. Increased cache hits
+
+Changed caching on instance variables reads
+How it works in Ruby 3.1?
+
+How variable is set?
+Each instance has it's own instance variable array.
+Each class has the table.
+
+Name Index
+@title 0
+@author 1
+
+first_post instance variable
+id variable
+0  "a"
+1 "b"
+
+hash lookup to do the variable.
+
+Class is cache key.
+@title - Post: Index 0
+@author - Post: Index 1
+
+```ruby
+first_post = Post.new
+class FrontPagePost < Post; end
+```
+
+With how the objects change.
+We get rid of the map variable name <->
+
+So we remove the map and use variables_count, and we use shape ID as the cache key.
+
+Shape ID is cache Key.
+
+index is iv_count - 1
+
+Increased cache hits!
+
+2. Decreased code complexity
+
+2.1 Reduced frozen checks in ivar.
+
+Check if object is frozen.
+
+By definition, if the object is frozen, it cannot be cached.
+
+2.2. Removed undef sets in object allocations
+
+Object -> Instance variables.
+`obj.instance_variable_set(:@a, "a")`
+
+`obj.instance_variables #=? [:@a]`
+`undef != nil`
+
+`undef != nil`
+
+Object.new - Performance and complexity cost of setting undefs.
+
+We have "undef" shape. We're iterating up the tree. We don't need to pre-populate.
+
+3. Beneficial for JIT
+
+YJIT Generated Assembly
+Instance variable get.
+
+With object shapes - Fewer instructions, comparisons and memory reads
+
+4. Performance
+
+1. RailsBench
+Shapes is faster, and more
+
+2. Microbenchmarks
+[comparison]
+
+Shapes is faster in some other.
+vm_ivar_init_subclass
+
+class B < A
+
+b.set_ivars
+c.set_ivars
+
+Note: The cases when we set the subclass and use the same.
+
+@Jemmalssroff
+RubyConf Mini
+WNB.rb
+
