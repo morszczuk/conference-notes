@@ -386,6 +386,10 @@ You mentioned CI “reliability score”. How do you define that score?
 
 # Jemma Issroff - Implementing Object Shapes in CRuby (Shopify)
 
+## Takes
+- Concept of the Shape as the way to improve the performance of the Ruby language
+-
+## Draft notes
 She was working on Implementing Object Shapes in CRuby (with).
 
 1. What are object shapes?
@@ -563,3 +567,62 @@ Note: The cases when we set the subclass and use the same.
 RubyConf Mini
 WNB.rb
 
+
+# Security Doesn’t Have To Be a Nightmare - Wiktoria Dlach
+## Takes
+- CIA Triad - Cofidentiality, Interference, Availability
+- Think about security faster in the development loop
+- DAST/SAST - Dynamic application security testing and Static application security testing
+
+## Draft notes
+Low hanging fruits:
+### Sanitize the input
+### Validate the data
+No credentials in your repo - but for testing is okay... no, it's not okay.
+Then you add a new another resource,
+
+### Let the machines work for you
+DAST/SAST
+You can get instant feedback if you integrate the tool.
+
+Something that blew her mind. It will spark fire in your mind.
+There is no "one" security.
+There is so much, that it can be too overwhelming.
+3-5 acronyms per day.
+
+There is an infinte amount of threats but...
+all of them can be assoigned to 1 of 3 categories.
+
+1. Confidentiality
+2. Interference
+3. Availability
+
+The CIA Triad
+
+Confidentiality:
+- Who can see this resource?
+
+
+Integrity:
+- Who can create. Update and remove a resource?
+- Is there a way to see a malicious actor deleting all resources?
+
+
+Availability:
+- is this endpoint rate-limited?
+- What happens when external product is down?
+- How much time does a database migration take?
+
+### Shift Security Left
+When you look at the software process (6 phases) - shift the security to the left.
+
+Move fast and break things is over.
+
+## Questions
+How do you apply the CIA triad to a big and old codebase?
+
+How do I remove credentials from the git history of an active project with about a dozen people currently working on it? Send help.
+Huge effort - you have to have consensus. Then you choose the correct provider for the secret provider. Then you move away from these credentials.
+
+Decetify(DAST)
+Polaris (SAST)
