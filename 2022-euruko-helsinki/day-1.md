@@ -1,7 +1,13 @@
 # Yukihiro "Matz" Matsumoto - Keynote
 
-## TL;DR;
--
+## Takes
+- Pendulum of the staticaly/dynamic typing programming languages is swinging. We're currently on the "static typing" end, but who knows what will come in 10-15-20 years?
+- Matz is trying to prepare for that future, but at the same time being aware that he cannot foresee the future.
+- His answer to the industry's expectations in the area of the types is type signature.
+- Static type definitions is not considered a part of the Ruby future.
+- In ruby 3.2, there is already a set of tools that can be used for type signatures:
+  - [typeprof](https://github.com/ruby/typeprof)
+  - [gem_rbs_collection](https://github.com/ruby/gem_rbs_collection)
 
 ## Meeting notes
 
@@ -143,9 +149,7 @@ Salesforce, NaCL, GitHub Sposors, Ruby Community.
 Thank you
 
 
-
-
-### Questions
+## Questions
 
 What do you think about Sorbet?
 They needed it now.
@@ -181,6 +185,8 @@ Then we can enjoy the programming. We can do tries and errors to enjoy the progr
 "The joy is the most important to Ruby."
 
 # How Music Works (AppSignal)
+
+##
 
 What we are covering yoday?
 https://github.com/thijsc/how_music_works
@@ -626,3 +632,162 @@ Huge effort - you have to have consensus. Then you choose the correct provider f
 
 Decetify(DAST)
 Polaris (SAST)
+
+
+# Looking Into Peephole Optimizations - Maple Ong
+
+## Takes
+-
+
+## Draft notes
+What is peephole optimization?
+
+It involves looking at a small set of code to make it less redundant.
+Looks at several instructions at once, hence the name.
+
+Peephole used in Python, etc.
+
+Ruby implements peephole optimization. It's on by default.
+
+When that.
+
+`RubyVM::InstructionSequence` - a way to have a look at the
+It's put into linked list structure, before being passed in the virtual machine.
+(Bytecode -> Optimized bytecode)
+
+optimize method:
+1. Setup optimization options
+2. Iterate over linked-list
+   1. If elemnt is an instruction sequence
+   2. If peeophole optimization is turned on
+4. Move to next element
+
+What actually happens in the optimization method?
+
+`iseq_peephole_optimize` in `compile.c`
+
+Bunch of if conditions. For each of the elements, check if one of the optimization options.
+
+After the peephole optimizatoin pass, instruction should be smaller in size.
+Examples of peephole optimizaotins in Ruby
+
+### Combining multiple into one.
+```ruby
+("A".."Z").to_a
+```
+
+```assembly
+putstring "A"
+putstring "Z"
+newrange 0
+leave
+```
+
+After optimization
+
+```assembly
+newrange "A".."Z"
+leave
+```
+
+5.14x faster.
+
+### Removing unnecessary instructions
+`[*["hello", "world"]]`
+
+Without
+```assembly
+pustring "hello"
+pustring "world"
+newarray 2
+splatarray
+leave
+```
+
+After
+
+```assembly
+pustring "hello"
+pustring "world"
+newarray 2
+leave
+```
+
+1.31x faster
+
+### Removing rendudant instructions
+
+```ruby
+x = "gummies are the best"
+x = x
+```
+
+Before
+```assembly
+pustring "gummies are the best"
+setocal index: 0
+getocal index: 0
+dup
+setlocal index: 0
+leave
+```
+
+After
+```assembly
+pustring "gummies are the best"
+setocal index: 0
+getocal index: 0
+leave
+```
+same-ish.
+dup is just a pointer change
+
+### Using more efficient instructions
+
+foo = [1,2]
+foo = [*foo, 3]
+
+Before
+```assembly
+duparray [1, 2]
+setlocal index: 0
+getlocal index: 0
+splatarray
+duparray [3]
+concatarray
+leave
+```
+
+After
+```assembly
+duparray [1, 2]
+setlocal index: 0
+getlocal index: 0
+splatarray
+duparray [3] (???)
+concatarray
+leave
+```
+
+### Cons
+
+Only applies to very specific bytecode.
+Limited view into the code to make optimization decisions
+Optimizations have to be found and hand-written by human
+Not superoptimized.
+
+Ruby is a dynamic language, so it's hard to get information at compile time.
+
+Why doesn't the compiler just generate optimized bytecode?
+So it makes sense to split the compilation and optimization.
+(In Ruby) Optimizations have to be found and hand-written by human.
+
+### Comparison
+
+On top of the performance improvements, there's also a reduction in instruction emitted
+and in turn, reduction of total memory space used.
+
+YARV (Kevin Newton). What bytecode instructions do.
+J Hawthorn.
+
+@OngMaple
