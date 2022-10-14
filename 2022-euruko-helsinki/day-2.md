@@ -223,7 +223,121 @@ Start experimenting!
 Additional resources:
 - trunkbaseddevelopment.com
 
+# Lightnig talks
+
+## Talks 1 - Renato Cerqueira
+
+### Takes
+### Draft notes
+AppTweak - ASO Leader
+
+- Why to move from Sinatra?
+
+When we started using Sinatra, we had no documentation.
+Alternative was Frape (from 2010).
+It has parameter validation, grape-swagger, so the documentation is created.
+Grape is inspired by Sinatra, because of the inspiration.
+
+They couldn't move all of them:
+- Some of them
+- Rack::Cascade to migrate only part of the endpoints.
+
+It progressively moves endpoints one by one.
 
 
+## Talks 2 - Why bother about Questions
+
+### Takes
+- Questions are so important, but we often forget about them
 
 
+### Draft notes
+If you were a new superhero, what special power would you have?
+
+Read other people's mind
+Give smart answers always
+
+EM:
+- get people to understand each other automatically, without intervention
+
+Engineer:
+- work more collaboratively
+- understand other people, get rid of poverty
+
+
+He found answers from the meeting very wholesome.
+
+What actually happenned at the meeting that made him feel that way?
+
+
+At a more fundamental is a question.
+
+"According to Albert Einstein, asking questions is not about getting answers, is about solving problems"
+"Questoins connect
+
+"The road from ignorance to knowledge leads through asking questions."
+
+Questions help us work towards a shared purpose.
+
+Questions -> Geto to know your team members better -> Trust -> Psychological Safety
+
+The questions reveled so much about the team.
+
+## Talk 3 - Hans - Building Delightful Command-Line Apps in Ruby
+
+### Takes
+### Draft notes
+
+Ruby Developer from Vienna, Meister.
+
+Command line apps makes you feel like a hacker.
+CLI - rails app.
+Rails is successful because of its command line.
+What makes CLI successful?
+
+1. Affordances & Signifiers
+2. Feedback
+3. No surprises
+
+Ruby loves CLIs.
+Thor - whatisthor.com
+Bundler uses Thor as well.
+
+Thos makes it easy to provides arguments,
+Termianl Apps The Easy Way
+ttytoolkit.org - Piotr Murach
+
+Widgets you can use on the terminal
+Show progress that works as text.
+
+## Talk 4 - Welcome Ruby juniors - Hana Harencarova (@hanaharencar)
+
+### Takes
+### Draft notes
+There are companies looking for hires.
+There are juniors in the room.
+
+So how did I get here?
+
+She comes from "Psychology" background, then learned R during PhD, baby, Ruby, Sei Online, second kid, "Moms Learn to Code", le wagon, GitHub -> Euruko
+
+#### the happy path
+- Look for companies you want to work for
+- Companies want you to succeed
+- Build on your srengths
+- Find your mentors
+- Keep meeting people
+
+As a colleague....
+- Rech out to them when they join
+- Be ready to help
+- Do pairing and mentoring sessions
+- Make it clear it's okay to ask
+
+Show juniors taht you don't know answrs and you're vulnerable.
+
+Companies:
+- Craft the job adds and make the interview a pleasurable exper
+- Invest in the onboarding proccess
+
+MINSWAN - Matz is nice so we are nice
