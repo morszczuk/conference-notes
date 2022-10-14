@@ -478,3 +478,128 @@ That allowed her to support JRuby
 ## Questions?
 Big learning from JRuby?
 - When it was created it was 2001, so it's been a long time.
+
+#  Andy Carroll - Keynote
+
+## Talks
+
+## Raw notes
+
+These are not object shapes.
+
+They are the same.
+
+Welcome to Cambridge - 2018.
+A room of full of people - Business of Software.
+CTO of small
+STEP 1 1987 - copying the keyboard
+STEP 2 2007 - Rails
+STEP 3 2022 - PROFIT?
+
+## Story of Steve Shirley
+Steve Shirley
+Aged 5 - 1939, excelled in maths, there was no standard curriculum in '50 in UK.
+Aged Post Office Research.
+
+ICT1305
+
+1962
+
+Freelance Programmers - F International
+It sounded
+
+- I have no office
+- i have no employees
+
+1996 -
+
+Remote in '60.
+Flexible - 20 hours a week.
+Employee Owned - shareholders strust, so programmers were receiving money.
+Women.
+
+Dame Stephanie "Steve" Shirley - OBE CH (Companion of Honour)
+
+First women this, I couldn't drive a bus, I couldn't open a bank acount.
+She had to fight the work.
+Home and families responsibilities.
+She started to challenge the.
+"Steve" Shirley
+
+computer - a person who makes calculations
+
+THE POWER OF MATHS
+
+1906,
+Grace MF-ing Hopper
+She joined the reserves. She was sent to Harvard.
+The machine was itself.
+She was going through rank and competetence
+
+1946 - computer.
+
+She was no means female programmers. Anyaxis.
+The demo was a spectacular.
+Man posing to the
+ENIAC.
+Giant brians were the women.
+
+WITI had no knowledge of their works.
+
+In 1951 she worked on the first.
+
+A-0
+A-1
+A-2
+MATH-MATIC
+FLOW-MATIC
+
+PDQ Coomunity (Pretty Damn Quick)
+
+COBOL - by no means.
+
+Programming - Software Engineering (NATO Software Engineering Conference, in 7-11 Oct, 1965)
+
+Suzanne Fowler (2017) - Uber
+
+Turing - The limitation game
+Hidden Figures (book > movie)
+
+It's okay for me to talk about because "I look like you".
+
+Less of a question, more of a comment guy.
+Technology doesn't have anything to do with politics guy.
+Politics is just a formalization of power.
+
+It was just a joke, don't be so sensitive guy.
+"Totally in your personal space".
+
+Don't assume - or you make an ass of u & me
+Don't assume. It takes effort not to steorotype.
+
+Fear - We are scared of getting it wrong. Two flavours of fear:
+- OOPS - best to be nice, "I'm sorry that you were offended"
+- Will it be harder? - pushing against the stereotype is not easy
+
+Pay fairly. I mean it. - How to pay individuals. They know who is underpaid. Fix the apy of the folks that deserve it.
+This will help with hiring too.
+
+There is a risk that you will end up with the team consisting of the same looking guys.
+
+Mentoring/ Sponsorship"
+
+"Lending privilege"
+
+Bring back
+
+MATZ IS NICE AND SO WE ARE NICE...
+
+Push against the easy path of how the things were.
+
+It's difficult emotionally and practically. We can't take this on.
+
+Another perspectives. You are welcome, I'm sorry for the extra effort you need to make.
+
+Thanks, do better, and sorry for all the swears.
+
+It's bailing out for world which is more open.
