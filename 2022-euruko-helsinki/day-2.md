@@ -341,3 +341,140 @@ Companies:
 - Invest in the onboarding proccess
 
 MINSWAN - Matz is nice so we are nice
+
+# Ruby & JVM: A (Jruby) Love Story - Yarden Laifenfeld
+
+## Takes
+JRuby is another
+
+## Raw notes
+@yardenlaif
+
+She is going to talk about Java on the Ruby conference :o
+Software Engineer at Rookout
+Background in low level C
+Ruby/Java/Go/C#/Python/JavaScript/C++
+
+Support JRuby.
+
+(Year 2000) JRuby is a 100% Java implementation of the Ruby programming language. It is Ruby for the JVM.
+(JVM) - Java Virtual Machine
+
+In 2001 - JRuby is created.
+
+JRuby Advantages:
+- Integration with Java libraries
+- Running atop the JVM
+  - Threads
+  - Long running applications - optimising the in the long running application, service in Ruby in 10 years.
+
+ There are people who like writing Java, so you can integrate with Java libraries.
+
+ ### Why JRuby.md?
+ (Jordan Sissel, 2010)
+ - core and stdlib ruby changes violently
+ - cross-ruby date library
+ - need for threads
+
+### CRuby Advantages
+- Larger Community
+- More features
+
+More people to fix bugs.
+2.6 and lower.
+
+Should you use JRuby?
+I don't know, you choose.
+
+You need to make the trade-off. Changing to JRuby, if you know Ruby, it's not difficult.
+Task: Support JRuby in a debugger for productioun.
+
+Supporting JRuby:
+- Running an app
+- Adding a breakpoint
+- Collecting data
+
+### Java or Ruby
+We had Java debugger and Ruby debugger.
+
+Running an app
+```bash
+rvm install jruby
+rvm use jruby
+
+bundle install
+```
+
+3 business days later...
+
+`bundle config unset force_ruby_platform` - that's for CRuby, not Jruby!
+
+It says you have to use native platforms, which are not supported by JRuby.
+
+### Now - adding an endpoint
+TracePoints
+[tracepoints]
+
+```ruby
+tracepoint = Tracepoint.new(:line) do
+  # ...
+end
+tracepoint.enable(target: method(:m1), target_line: 14)
+```
+
+An error:
+`wrong number of arguments`
+
+At this stage, you would she decided to go to Java.
+
+### Java implementation
+
+- -javaagent flag
+- premain entrypoint
+- Instrumentation API
+
+How JVM works?
+-> Code -> Compiler -> Bytecode -> JVM
+
+`new Item()`
+
+JVM -> Get Item class bytecode -> Class Loader -> Return Item class bytecode
+
+You can add a transformer to change your code through the instrumenter.
+
+JVM -> Get Item class bytecode -> Class Loader -> Return Item class bytecode -> Code Modifier ->
+
+
+Adding a breakpoint
+
+Expectation: It doesn't work.
+
+Suddenly, the breakpoint is active.
+
+"Something smashing the keyboard is the answer."
+A few, spaced out invocations -> Class isn't loaded
+
+JRuby Compilation Modes:
+- Interpretation (line by line, no bytecode is loading)
+- JIT - it will take hot points - code that is run often.
+- Compilation (every class in JRuby is loaded as a Java class, it will go through the interpretation)
+
+`compile.mode=FORCE`
+
+### Collecting data
+- class scope, self, context - many variables in the data passed from the Java
+
+Then in self there is another set of many variables.
+
+That allowed her to support JRuby
+
+### What Next?
+- Ruby TracePoint API
+- Java Agents
+- Class Loaders
+
+@yardenlaif
+
+## Questions?
+Big learning from JRuby?
+- When it was created it was 2001, so it's been a long time.
